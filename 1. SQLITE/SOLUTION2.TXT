@@ -1,0 +1,291 @@
+JOURNAL-2	
+
+	TABLE-1:STUDENT TABLE:
+	----------------------	
+	CREATE TABLE STUDENT
+	(
+	ROLL_NO INT PRIMARY KEY,
+	STUD_NAME TEXT,
+	CLASS TEXT,
+	BIRTH_DATE DATE
+	);
+	
+	INSERT DATA IN STUDENT TABLE:
+	-----------------------------
+   
+	INSERT INTO STUDENT(ROLL_NO,STUD_NAME,CLASS,BIRTH_DATE)
+	VALUES(1,'RIYA','FY','2-JAN-2004');
+   
+	INSERT INTO STUDENT(ROLL_NO,STUD_NAME,CLASS,BIRTH_DATE)
+	VALUES(102,'RAJ','FY','5-MAY-2003');
+   
+	INSERT INTO STUDENT(ROLL_NO,STUD_NAME,CLASS,BIRTH_DATE)
+	VALUES(103,'RAHUL','SY','15-APR-2003');
+   
+	INSERT INTO STUDENT(ROLL_NO,STUD_NAME,CLASS,BIRTH_DATE)
+	VALUES(104,'RESHMA','TY','25-JUN-2002');
+   
+	INSERT INTO STUDENT(ROLL_NO,STUD_NAME,CLASS,BIRTH_DATE)
+	VALUES(105,'NEHAL','SY','31-MAR-2002');
+
+ 	INSERT INTO STUDENT(ROLL_NO,STUD_NAME,CLASS,BIRTH_DATE)
+  	VALUES(106,'VIRAT','TY','5-JAN-2002');
+	
+	INSERT INTO STUDENT(ROLL_NO,STUD_NAME,CLASS,BIRTH_DATE)
+ 	VALUES(107,'SHIYA','TY','25-AUG-2000');
+
+SELECT * FROM STUDENT;
++---------+-----------+-------+-------------+
+| ROLL_NO | STUD_NAME | CLASS | BIRTH_DATE  |
++---------+-----------+-------+-------------+
+| 101     | RIYA      | FY    | 2-JAN-2004  |
+| 102     | RAJ       | FY    | 5-MAY-2003  |
+| 103     | RAHUL     | SY    | 15-APR-2003 |
+| 104     | RESHMA    | TY    | 25-JUN-2002 |
+| 105     | NEHAL     | SY    | 31-MAR-2002 |
+| 106     | VIRAT     | TY    | 5-JAN-2002  |
+| 107     | SHIYA     | TY    | 25-AUG-2000 |
++---------+-----------+-------+-------------+
+   
+	TABLE-2:STUDENT-COURSE TABLE:
+	----------------------------
+
+	CREATE TABLE COURSE
+	(
+	COURSE_NO INT PRIMARY KEY,
+	COURSE_NAME TEXT,
+	MAX_MARKS INT,
+	PASS_MARKS INT
+	);
+    INSERT DATA IN COURSE TABLE:
+	-----------------------------
+	
+	INSERT INTO COURSE(COURSE_NO,COURSE_NAME,MAX_MARKS,PASS_MARKS)
+	VALUES(201,' DATABASE MANAGEMENT SYSTEM',50,36);
+
+	INSERT INTO COURSE(COURSE_NO,COURSE_NAME,MAX_MARKS,PASS_MARKS)
+	VALUES(202,'COMPUTER NETWORK',60,56);
+
+	INSERT INTO COURSE(COURSE_NO,COURSE_NAME,MAX_MARKS,PASS_MARKS)
+	VALUES(203,'PROGRAMMING SKILLS',40,26);
+
+	INSERT INTO COURSE(COURSE_NO,COURSE_NAME,MAX_MARKS,PASS_MARKS)
+	VALUES(204,'C++',52,36);
+
+	INSERT INTO COURSE(COURSE_NO,COURSE_NAME,MAX_MARKS,PASS_MARKS)
+	VALUES(205,'JAVA',52,40);
+	
+	INSERT INTO COURSE(COURSE_NO,COURSE_NAME,MAX_MARKS,PASS_MARKS)
+   	VALUES(206,'COMUNICATION SKILLS',90,36);
+ 	
+	INSERT INTO COURSE(COURSE_NO,COURSE_NAME,MAX_MARKS,PASS_MARKS)
+  	VALUES(207,'PYTHON',78,36);
+	
+	SELECT * FROM COURSE;
++-----------+----------------------------+-----------+------------+
+| COURSE_NO |        COURSE_NAME         | MAX_MARKS | PASS_MARKS |
++-----------+----------------------------+-----------+------------+
+| 201       | DATABASE MANAGEMENT SYSTEM | 50        | 36         |
+| 202       | COMPUTER NETWORK           | 60        | 56         |
+| 203       | PROGRAMMING SKIILS         | 40        | 26         |
+| 204       | C++                        | 52        | 36         |
+| 205       | JAVA                       | 52        | 40         |
+| 206       | COMUNICATION SKILLS        | 90        | 36         |
+| 207       | PYTHON                     | 78        | 36         |
++-----------+----------------------------+-----------+------------+
+	
+	TABLE-3:SC TABLE:
+	----------------
+	CREATE TABLE SC
+	(
+	ROLL_NO INT REFERENCES STUDENT(ROLL_NO),
+	COURSE_NO INT REFERENCES COURSE(COURSE_NO),
+	MARKS INT
+	);
+	
+	INSERT DATA IN SC TABLE:
+	-------------------------
+
+INSERT INTO SC(ROLL_NO,COURSE_NO,MARKS)
+VALUES(101,201,76);
+
+INSERT INTO SC(ROLL_NO,COURSE_NO,MARKS)
+VALUES(102,202,75);
+
+INSERT INTO SC(ROLL_NO,COURSE_NO,MARKS)
+VALUES(103,203,78);
+
+INSERT INTO SC(ROLL_NO,COURSE_NO,MARKS)
+VALUES(104,204,67);
+
+INSERT INTO SC(ROLL_NO,COURSE_NO,MARKS)
+VALUES(105,205,97);
+	
+INSERT INTO SC(ROLL_NO,COURSE_NO,MARKS)
+VALUES(106,206,67);
+
+INSERT INTO SC(ROLL_NO,COURSE_NO,MARKS)
+VALUES(107,207,97);
+
+ SELECT * FROM SC;
++---------+-----------+-------+
+| ROLL_NO | COURSE_NO | MARKS |
++---------+-----------+-------+
+| 101     | 201       | 76    |
+| 102     | 202       | 75    |
+| 103     | 203       | 78    |
+| 104     | 204       | 67    |
+| 105     | 205       | 97    |
+| 106     | 206       | 67    |
+| 107     | 207       | 97    |
++---------+-----------+-------+
+
+QUERIES:
+
+1)DISPLAY details of student who takes ‘Database Management System’ course.
+ANSWER:
+	
+        SELECT S.* FROM STUDENT S,SC M
+   ...> WHERE S.ROLL_NO=M.ROLL_NO AND M.COURSE_NO=(SELECT COURSE_NO FROM COURSE WHERE COURSE_NAME='DATABASE MANAGEMENT SYSTEM');
++---------+-----------+-------+------------+
+| ROLL_NO | STUD_NAME | CLASS | BIRTH_DATE |
++---------+-----------+-------+------------+
+| 101     | RIYA      | FY    | 2-JAN-2004 |
++---------+-----------+-------+------------+
+
+
+2. Display the names of students who have scored more than 70% in Computer
+Networks and have not failed in any subject.
+ANSWER:
+	SELECT STUD_NAME FROM ((STUDENT INNER JOIN SC ON STUDENT.ROLL_NO=SC.ROLL_NO) INNER JOIN COURSE ON
+   ...> SC.COURSE_NO=COURSE.COURSE_NO) WHERE COURSE.COURSE_NAME="COMPUTER NETWORK" AND SC.MARKS>=(70*100)/100 AND SC.MARKS>=35;
+
++-----------+
+| STUD_NAME |
++-----------+
+| RAJ       |
++-----------+
+3. Display the average marks obtained by each student.
+ANSWER:
+	SELECT ROLL_NO,AVG(MARKS) "AVERAGE MARKS SCORED BY STUDENT" FROM SC
+   ...> GROUP BY ROLL_NO;
++---------+---------------------------------+
+| ROLL_NO | AVERAGE MARKS SCORED BY STUDENT |
++---------+---------------------------------+
+| 101     | 76.0                            |
+| 102     | 75.0                            |
+| 103     | 78.0                            |
+| 104     | 67.0                            |
+| 105     | 97.0                            |
+| 106     | 67.0                            |
+| 107     | 97.0                            |
++---------+---------------------------------+
+4. Select all courses where passing marks are more than 30% of average maximum
+mark.
+ANSWER:
+	SELECT *,AVG(PASS_MARKS) FROM COURSE
+   ...> GROUP BY COURSE_NO
+   ...> HAVING PASS_MARKS>30;
++-----------+----------------------------+-----------+------------+-----------------+
+| COURSE_NO |        COURSE_NAME         | MAX_MARKS | PASS_MARKS | AVG(PASS_MARKS) |
++-----------+----------------------------+-----------+------------+-----------------+
+| 201       | DATABASE MANAGEMENT SYSTEM | 50        | 36         | 36.0            |
+| 202       | COMPUTER NETWORK           | 60        | 56         | 56.0            |
+| 204       | C++                        | 52        | 36         | 36.0            |
+| 205       | JAVA                       | 52        | 40         | 40.0            |
+| 206       | COMUNICATION SKILLS        | 90        | 36         | 36.0            |
+| 207       | PYTHON                     | 78        | 36         | 36.0            |
++-----------+----------------------------+-----------+------------+-----------------+
+	
+5. Display all course name.
+ANSWER:
+SELECT COURSE_NAME FROM COURSE;
++----------------------------+
+|        COURSE_NAME         |
++----------------------------+
+| DATABASE MANAGEMENT SYSTEM |
+| COMPUTER NETWORK           |
+| PROGRAMMING SKIILS         |
+| C++                        |
+| JAVA                       |
+| COMUNICATION SKILLS        |
+| PYTHON                     |
++----------------------------+
+6. Display the student details who have secure 1st rank in ‘Computer Network’
+course.
+ANSWER:
+	 SELECT *,MAX(MARKS) FROM SC M,STUDENT S
+   ...> WHERE S.ROLL_NO=M.ROLL_NO AND M.COURSE_NO=(SELECT COURSE_NO FROM COURSE WHERE COURSE_NAME='COMPUTER NETWORK');
++---------+-----------+-------+---------+-----------+-------+------------+------------+
+| ROLL_NO | COURSE_NO | MARKS | ROLL_NO | STUD_NAME | CLASS | BIRTH_DATE | MAX(MARKS) |
++---------+-----------+-------+---------+-----------+-------+------------+------------+
+| 102     | 202       | 75    | 102     | RAJ       | FY    | 5-MAY-2003 | 75         |
++---------+-----------+-------+---------+-----------+-------+------------+------------+
+
+7. Display all SY student list along with course name.
+ANSWER:
+	SELECT S.*,C.COURSE_NAME FROM STUDENT S,SC M,COURSE C
+	WHERE S.ROLL_NO=M.ROLL_NO AND C.COURSE_NO=M.COURSE_NO AND S.CLASS='SY';
++---------+-----------+-------+-------------+--------------------+
+| ROLL_NO | STUD_NAME | CLASS | BIRTH_DATE  |    COURSE_NAME     |
++---------+-----------+-------+-------------+--------------------+
+| 103     | RAHUL     | SY    | 15-APR-2003 | PROGRAMMING SKIILS |
+| 105     | NEHAL     | SY    | 31-MAR-2002 | JAVA               |
++---------+-----------+-------+-------------+--------------------+
+
+8. Display the average marks obtained by each student. 
+ANSWER:
+	SELECT *,AVG(MARKS) FROM SC
+	GROUP BY ROLL_NO;
++---------+-----------+-------+------------+
+| ROLL_NO | COURSE_NO | MARKS | AVG(MARKS) |
++---------+-----------+-------+------------+
+| 101     | 201       | 76    | 76.0       |
+| 102     | 202       | 75    | 75.0       |
+| 103     | 203       | 78    | 78.0       |
+| 104     | 204       | 67    | 67.0       |
+| 105     | 205       | 97    | 97.0       |
+| 106     | 206       | 67    | 67.0       |
+| 107     | 207       | 97    | 97.0       |
++---------+-----------+-------+------------+	 
+
+9. Write a trigger which does not allow deletion of student whose pass_mark is
+greater than 35.
+ANSWER:
+	CREATE TRIGGER DEL_TRG
+	BEFORE DELETE ON STUDENT
+	BEGIN
+		SELECT CASE
+		WHEN (SELECT S.*,C.*,M.* FROM STUDENT S, COURSE C,SC M WHERE S.ROLL_NO=M.ROLL_NO AND C.COURSE_NO=M.COURSE_NO AND C.PASS_MARKS>35)
+		THEN RAISE(ABORT,'WHEN THE SUBJECT HAVE PASSING MARKS MORE THEN 35 ')
+		END;
+	END;
+
+10. Write a trigger which does not allow insertion / updating student whose max-
+marks more than 100 and less than 0.
+ANSWER:
+	CREATE TRIGGER INSR_TRG
+
+	BEFORE INSERT ON SC
+	BEGIN
+		SELECT CASE
+			WHEN NEW.MARKS>100 OR NEW.MARKS<0
+			THEN RAISE (ABORT,'PLEASE ENTER MARKS BETWEEEN 0 TO 100')
+		END;
+	END;
+
+	CREATE TRIGGER UPD_TRG
+	BEFORE UPDATE ON SC
+	BEGIN
+		SELECT
+		CASE
+
+			WHEN NEW.MARKS>100 OR NEW.MARKS<0
+			THEN RAISE (ABORT,'PLEASE ENTER MARKS BETWEEEN 0 TO 100')
+		END;
+	END;
+
+
+
+
+
