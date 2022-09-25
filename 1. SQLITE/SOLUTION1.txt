@@ -1,0 +1,371 @@
+﻿*CREATE TABLE EMPLOYEE:-
+
+CREATE TABLE EMPLOYEE
+(
+EMP_ID INT PRIMARY KEY,
+EMP_NAME TEXT,
+GENDER TEXT,
+DEPT_NO INT REFERENCES DEPARTMENT(DEPT_NO),
+ADDRESS TEXT,
+DESIGNATION TEXT,
+SALARY INT,
+EXPERIENCE INT,
+EMAIL TEXT
+);
+
+*INSERT DATA IN EMPLOYEE TABLE:-
+
+INSERT INTO EMPLOYEE(EMP_ID,EMP_NAME,GENDER,DEPT_NO,ADDRESS,DESIGNATION,SALARY,EXPERIENCE,EMAIL)
+VALUES(101,'POOJA','FEMAIL',1,'DELHI','MARKETING HEAD',20000,2,'POOJA@GMAIL.COM');
+INSERT INTO EMPLOYEE(EMP_ID,EMP_NAME,GENDER,DEPT_NO,ADDRESS,DESIGNATION,SALARY,EXPERIENCE,EMAIL)
+VALUES(102,'ARATI','FEMALE',2,'MUMBAI','SALES PERSON',25000,6,'ARATI@GMAIL.COM');
+INSERT INTO EMPLOYEE(EMP_ID,EMP_NAME,GENDER,DEPT_NO,ADDRESS,DESIGNATION,SALARY,EXPERIENCE,EMAIL)
+VALUES(103,'MAITRY','FEMALE',3,'HYDRABAD','IT MANAGEMENT',35000,5,'MAITRY@GMAIL.COM');
+INSERT INTO EMPLOYEE(EMP_ID,EMP_NAME,GENDER,DEPT_NO,ADDRESS,DESIGNATION,SALARY,EXPERIENCE,EMAIL)
+VALUES(104,'RAJ','MALE',4,'AHMEDABAD','C.E.O',32000,5,'RAJ@GMAIL.COM');
+INSERT INTO EMPLOYEE(EMP_ID,EMP_NAME,GENDER,DEPT_NO,ADDRESS,DESIGNATION,SALARY,EXPERIENCE,EMAIL)
+VALUES(105,'RAHUL','MALE',5,'SURAT','DATA ANALYZER',79000,2,'RAHUL@GMAIL.COM');
+INSERT INTO EMPLOYEE(EMP_ID,EMP_NAME,GENDER,DEPT_NO,ADDRESS,DESIGNATION,SALARY,EXPERIENCE,EMAIL)
+VALUES(106,'AJAY','MAIL',6,'MP','ASSISTANT PROFESSOR',50000,10,'AJAY@GMAIL.COM');
+INSERT INTO EMPLOYEE(EMP_ID,EMP_NAME,GENDER,DEPT_NO,ADDRESS,DESIGNATION,SALARY,EXPERIENCE,EMAIL)
+VALUES(107,'VIJAY','MAIL',7,'BARDOLI','PROFESSOR',20000,5,'VIJAYJAY@GMAIL.COM');
+
+SELECT * FROM employee;
+
++--------+----------+--------+---------+-----------+---------------------+--------+------------+------------------+
+| EMP_ID | EMP_NAME | GENDER | DEPT_NO |  ADDRESS  |     DESIGNATION     | SALARY | EXPERIENCE |      EMAIL       |
++--------+----------+--------+---------+-----------+---------------------+--------+------------+------------------+
+| 101    | POOJA    | FEMAIL | 1       | DELHI     | MARKETING HEAD      | 20000  | 2          | POOJA@GMAIL.COM  |
+| 102    | ARATI    | FEMALE | 2       | MUMBAI    | SALES PERSON        | 25000  | 6          | ARATI@GMAIL.COM  |
+| 103    | MAITRY   | FEMALE | 3       | HYDRABAD  | IT MANAGEMENT       | 35000  | 5          | MAITRY@GMAIL.COM |
+| 104    | RAJ      | MALE   | 4       | AHMEDABAD | C.E.O               | 32000  | 5          | RAJ@GMAIL.COM    |
+| 105    | RAHUL    | MALE   | 5       | SURAT     | DATA ANALYZER       | 79000  | 2          | RAHUL@GMAIL.COM  |
+| 106    | AJAY     | MAIL   | 6       | MP        | ASSISTANT PROFESSOR | 50000  | 10         | AJAY@GMAIL.COM   |
+| 107    | VIJAY    | MAIL   | 7       | BARDOLI   | PROFESSOR           | 20000  | 5          | VIJAY@GMAIL.COM  |
++--------+----------+--------+---------+-----------+---------------------+--------+------------+------------------+
+
+*CREATE TABLE DEPARTMENT:-
+
+CREATE TABLE DEPARTMENT
+(
+DEPT_NO INT PRIMARY KEY,
+DEPT_NAME TEXT NOT NULL
+LOCATION TEXT
+);
+
+*DATA INSERT IN DEPARTMENT TABLE:-
+
+INSERT INTO DEPARTMENT(DEPT_NO,DEPT_NAME,LOCATION)
+VALUES(1,'SALES','DELHI');
+INSERT INTO DEPARTMENT(DEPT_NO,DEPT_NAME,LOCATION)
+VALUES(2,'PRODUCTION','MUMBAI');
+INSERT INTO DEPARTMENT(DEPT_NO,DEPT_NAME,LOCATION)
+VALUES(3,'IT','HYDERABAD');
+INSERT INTO DEPARTMENT(DEPT_NO,DEPT_NAME,LOCATION)
+VALUES(4,'MARKETING','AHMEDABAD');
+INSERT INTO DEPARTMENT(DEPT_NO,DEPT_NAME,LOCATION)
+VALUES(5,'ANALYSIS','SURAT');
+INSERT INTO DEPARTMENT(DEPT_NO,DEPT_NAME,LOCATION)
+VALUES(6,'BCA','MP');
+INSERT INTO DEPARTMENT(DEPT_NO,DEPT_NAME,LOCATION)
+VALUES(7,'BBA','BARDOLI');
+
+SELECT * FROM DEPARTMENT;
+ +---------+------------+-----------+
+| DEPT_NO | DEPT_NAME  | LOCATION  |
++---------+------------+-----------+
+| 1       | SALES      | DELHI     |
+| 2       | PRODUCTION | MUMBAI    |
+| 3       | IT         | HYDERABAD |
+| 4       | MARKETING  | AHMEDABAD |
+| 5       | ANALYSIS   | SURAT     |
+| 6       | BCA        | MP        |
+| 7       | BBA        | BARDOLI   |
++---------+------------+-----------+
+
+QUERIES:
+
+
+1. Display all Department belonging to location ‘Surat’.
+ANSWER:
+	 SELECT * FROM DEPARTMENT
+   WHERE LOCATION='SURAT';
++---------+-----------+----------+
+| DEPT_NO | DEPT_NAME | LOCATION |
++---------+-----------+----------+
+| 5       | ANALYSIS  | SURAT    |
++---------+-----------+----------+
+
+2. List all department name statring with ‘A’.
+ANSWER:
+	 SELECT DEPT_NAME FROM DEPARTMENT
+   WHERE DEPT_NAME LIKE'A%';
++-----------+
+| DEPT_NAME |
++-----------+
+| ANALYSIS  |
++-----------+
+
+3. List all departments whose number is between 1 and 100.
+ANSWER:
+	 SELECT * FROM DEPARTMENT
+   WHERE DEPT_NO BETWEEN 1 AND 100;
++---------+------------+-----------+
+| DEPT_NO | DEPT_NAME  | LOCATION  |
++---------+------------+-----------+
+| 1       | SALES      | DELHI     |
+| 2       | PRODUCTION | MUMBAI    |
+| 3       | IT         | HYDERABAD |
+| 4       | MARKETING  | AHMEDABAD |
+| 5       | ANALYSIS   | SURAT     |
+| 6       | BCA        | MP        |
+| 7       | BBA        | BARDOLI   |
++---------+------------+-----------+
+
+4. Delete ‘TRG’ department.
+ANSWER:
+	DELETE FROM DEPARTMENT
+   WHERE DEPT_NAME='TRG';
+
+5. Change department name ‘BBA’ to ‘IT’.
+ANSWER:
+	 UPDATE DEPARTMENT
+   SET DEPT_NAME='IT'
+   WHERE DEPT_NAME='BBA';
+ SELECT * FROM DEPARTMENT ;
++---------+------------+-----------+
+| DEPT_NO | DEPT_NAME  | LOCATION  |
++---------+------------+-----------+
+| 1       | SALES      | DELHI     |
+| 2       | PRODUCTION | MUMBAI    |
+| 3       | IT         | HYDERABAD |
+| 4       | MARKETING  | AHMEDABAD |
+| 5       | ANALYSIS   | SURAT     |
+| 6       | BCA        | MP        |
+| 7       | IT         | BARDOLI   |
++---------+------------+-----------+
+
+ UPDATE DEPARTMENT
+   SET DEPT_NAME='BBA'
+   WHERE DEPT_NO=7;
+ SELECT * FROM DEPARTMENT ;
++---------+------------+-----------+
+| DEPT_NO | DEPT_NAME  | LOCATION  |
++---------+------------+-----------+
+| 1       | SALES      | DELHI     |
+| 2       | PRODUCTION | MUMBAI    |
+| 3       | IT         | HYDERABAD |
+| 4       | MARKETING  | AHMEDABAD |
+| 5       | ANALYSIS   | SURAT     |
+| 6       | BCA        | MP        |
+| 7       | BBA        | BARDOLI   |
++---------+------------+-----------+
+
+6. Update the location whose dept_name second letter is ‘a’.
+ANSWER:
+	
+	 UPDATE DEPARTMENT
+   SET LOCATION='VAPI'
+   WHERE DEPT_NAME LIKE'_A%';
+ SELECT * FROM DEPARTMENT ;
++---------+------------+-----------+
+| DEPT_NO | DEPT_NAME  | LOCATION  |
++---------+------------+-----------+
+| 1       | SALES      | VAPI      |
+| 2       | PRODUCTION | MUMBAI    |
+| 3       | IT         | HYDERABAD |
+| 4       | MARKETING  | VAPI      |
+| 5       | ANALYSIS   | SURAT     |
+| 6       | BCA        | MP        |
+| 7       | BBA        | BARDOLI   |
++---------+------------+-----------+
+
+7. Display data whose location is ‘Baroda’, ‘Surat’ and ‘Ahemdabad’.
+ANSWER:
+	SELECT * FROM DEPARTMENT
+   WHERE LOCATION='BARDOLI' OR LOCATION='SURAT' OR LOCATION='AHMEDABAD';
++---------+-----------+-----------+
+| DEPT_NO | DEPT_NAME | LOCATION  |
++---------+-----------+-----------+
+| 1       | SALES     | AHMEDABAD |
+| 4       | MARKETING | AHMEDABAD |
+| 5       | ANALYSIS  | SURAT     |
+| 7       | BBA       | BARDOLI   |
++---------+-----------+-----------+
+
+
+8.DISPLAY DATA WHO ARE NOT FROM 'SALES' AND 'MARKETING' DEPARTMENT.
+ANSWER:
+	SELECT * FROM DEPARTMENT
+   WHERE DEPT_NAME!='SALES' AND DEPT_NAME!='MARKETING';
++---------+------------+-----------+
+| DEPT_NO | DEPT_NAME  | LOCATION  |
++---------+------------+-----------+
+| 2       | PRODUCTION | MUMBAI    |
+| 3       | IT         | HYDERABAD |
+| 5       | ANALYSIS   | SURAT     |
+| 6       | BCA        | MP        |
+| 7       | BBA        | BARDOLI   |
++---------+------------+-----------+
+
+			OR
+
+
+ SELECT * FROM DEPARTMENT
+   WHERE DEPT_NAME NOT IN('SALES','MARKETING');
++---------+------------+-----------+
+| DEPT_NO | DEPT_NAME  | LOCATION  |
++---------+------------+-----------+
+| 2       | PRODUCTION | MUMBAI    |
+| 3       | IT         | HYDERABAD |
+| 5       | ANALYSIS   | SURAT     |
+| 6       | BCA        | MP        |
+| 7       | BBA        | BARDOLI   |
++---------+------------+-----------+
+
+9.LIST ALL RECORDS OF EACH TABLE IN ASCENDING ORDER.
+ANSWER:
+	 SELECT * FROM DEPARTMENT
+   ORDER BY DEPT_NAME ASC;
++---------+------------+-----------+
+| DEPT_NO | DEPT_NAME  | LOCATION  |
++---------+------------+-----------+
+| 5       | ANALYSIS   | SURAT     |
+| 7       | BBA        | BARDOLI   |
+| 6       | BCA        | MP        |
+| 3       | IT         | HYDERABAD |
+| 4       | MARKETING  | AHMEDABAD |
+| 2       | PRODUCTION | MUMBAI    |
+| 1       | SALES      | DELHI     |
++---------+------------+-----------+
+
+ SELECT * FROM EMPLOYEE
+   ORDER BY EMP_NAME ASC;
++--------+----------+--------+---------+-----------+---------------------+--------+------------+------------------+
+| EMP_ID | EMP_NAME | GENDER | DEPT_NO |  ADDRESS  |     DESIGNATION     | SALARY | EXPERIENCE |      EMAIL       |
++--------+----------+--------+---------+-----------+---------------------+--------+------------+------------------+
+| 106    | AJAY     | MAIL   | 6       | MP        | ASSISTANT PROFESSOR | 50000  | 10         | AJAY@GMAIL.COM   |
+| 102    | ARATI    | FEMALE | 2       | MUMBAI    | SALES PERSON        | 25000  | 6          | ARATI@GMAIL.COM  |
+| 103    | MAITRY   | FEMALE | 3       | HYDRABAD  | IT MANAGEMENT       | 35000  | 5          | MAITRY@GMAIL.COM |
+| 101    | POOJA    | FEMAIL | 1       | DELHI     | MARKETING HEAD      | 20000  | 2          | POOJA@GMAIL.COM  |
+| 105    | RAHUL    | MALE   | 5       | SURAT     | DATA ANALYZER       | 79000  | 2          | RAHUL@GMAIL.COM  |
+| 104    | RAJ      | MALE   | 4       | AHMEDABAD | C.E.O               | 32000  | 5          | RAJ@GMAIL.COM    |
+| 107    | VIJAY    | MAIL   | 7       | BARDOLI   | PROFESSOR           | 20000  | 5          | VIJAY@GMAIL.COM  |
++--------+----------+--------+---------+-----------+---------------------+--------+------------+------------------+
+
+10.DISPLAY FEMALE EMPLOYEE LIST.
+ANSWER:
+	SELECT * FROM EMPLOYEE
+   WHERE GENDER='FEMALE';
++--------+----------+--------+---------+----------+---------------+--------+------------+------------------+
+| EMP_ID | EMP_NAME | GENDER | DEPT_NO | ADDRESS  |  DESIGNATION  | SALARY | EXPERIENCE |      EMAIL       |
++--------+----------+--------+---------+----------+---------------+--------+------------+------------------+
+| 102    | ARATI    | FEMALE | 2       | MUMBAI   | SALES PERSON  | 25000  | 6          | ARATI@GMAIL.COM  |
+| 103    | MAITRY   | FEMALE | 3       | HYDRABAD | IT MANAGEMENT | 35000  | 5          | MAITRY@GMAIL.COM |
++--------+----------+--------+---------+----------+---------------+--------+------------+------------------+
+
+11.DISPLAY ALL RECORDE ORDER BY EMP_NAME.
+
+ANSWER:
+	 SELECT * FROM EMPLOYEE
+   ORDER BY EMP_NAME DESC;
++--------+----------+--------+---------+-----------+---------------------+--------+------------+------------------+
+| EMP_ID | EMP_NAME | GENDER | DEPT_NO |  ADDRESS  |     DESIGNATION     | SALARY | EXPERIENCE |      EMAIL       |
++--------+----------+--------+---------+-----------+---------------------+--------+------------+------------------+
+| 107    | VIJAY    | MAIL   | 7       | BARDOLI   | PROFESSOR           | 20000  | 5          | VIJAY@GMAIL.COM  |
+| 104    | RAJ      | MALE   | 4       | AHMEDABAD | C.E.O               | 32000  | 5          | RAJ@GMAIL.COM    |
+| 105    | RAHUL    | MALE   | 5       | SURAT     | DATA ANALYZER       | 79000  | 2          | RAHUL@GMAIL.COM  |
+| 101    | POOJA    | FEMAIL | 1       | DELHI     | MARKETING HEAD      | 20000  | 2          | POOJA@GMAIL.COM  |
+| 103    | MAITRY   | FEMALE | 3       | HYDRABAD  | IT MANAGEMENT       | 35000  | 5          | MAITRY@GMAIL.COM |
+| 102    | ARATI    | FEMALE | 2       | MUMBAI    | SALES PERSON        | 25000  | 6          | ARATI@GMAIL.COM  |
+| 106    | AJAY     | MAIL   | 6       | MP        | ASSISTANT PROFESSOR | 50000  | 10         | AJAY@GMAIL.COM   |
++--------+----------+--------+---------+-----------+---------------------+--------+------------+------------------+
+
+12.FINDS THE NAME OF EMPLOYEE WHO HAS SALARY LESS THAN 50000 AND GRATER THAN 20000.
+ANSWER:
+	 SELECT EMP_NAME FROM EMPLOYEE
+   WHERE SALARY BETWEEN 20000 AND 50000;
++----------+
+| EMP_NAME |
++----------+
+| POOJA    |
+| ARATI    |
+| MAITRY   |
+| RAJ      |
+| AJAY     |
+| VIJAY    |
++----------+
+
+13.DISPLAY THE NAMES AND DESIGNATION OF ALL FEMALE EMPLOYEE IN DESCENDING ORDER.
+ANSWER:
+	SELECT EMP_NAME , DESIGNATION FROM EMPLOYEE
+   WHERE GENDER='FEMALE'
+   ORDER BY EMP_NAME DESC;
++----------+----------------+
+| EMP_NAME |  DESIGNATION   |
++----------+----------------+
+| POOJA    | MARKETING HEAD |
+| MAITRY   | IT MANAGEMENT  |
+| ARATI    | SALES PERSON   |
++----------+----------------+
+	
+
+14.DISPLAY THE NAME OF EMPLOYEE WHOES NAMES START WITH 'A' AND END WITH 'A'.
+ANSWER:
+	SELECT EMP_NAME FROM EMPLOYEE
+   WHERE EMP_NAME LIKE'A%A';
+
+15. Find the name of employee and salary for those who had obtain minimum
+salary.
+ANSWER:
+	 SELECT MIN(SALARY) FROM EMPLOYEE;
++-------------+
+| MIN(SALARY) |
++-------------+
+| 20000       |
++-------------+
+
+16. Add 10% raise in salary of all employees whose department is ‘IT’.
+ANSWER:
+	 UPDATE EMPLOYEE
+   SET SALARY=SALARY+(SALARY*10)/100
+   WHERE DEPT_NO=(SELECT DEPT_NO FROM DEPARTMENT WHERE DEPT_NAME='IT');
+ SELECT * FROM EMPLOYEE;
++--------+----------+--------+---------+-----------+---------------------+--------+------------+------------------+
+| EMP_ID | EMP_NAME | GENDER | DEPT_NO |  ADDRESS  |     DESIGNATION     | SALARY | EXPERIENCE |      EMAIL       |
++--------+----------+--------+---------+-----------+---------------------+--------+------------+------------------+
+| 101    | POOJA    | FEMALE | 1       | DELHI     | MARKETING HEAD      | 20000  | 2          | POOJA@GMAIL.COM  |
+| 102    | ARATI    | FEMALE | 2       | MUMBAI    | SALES PERSON        | 25000  | 6          | ARATI@GMAIL.COM  |
+| 103    | MAITRY   | FEMALE | 3       | HYDRABAD  | IT MANAGEMENT       | 38500  | 5          | MAITRY@GMAIL.COM |
+| 104    | RAJ      | MALE   | 4       | AHMEDABAD | C.E.O               | 32000  | 5          | RAJ@GMAIL.COM    |
+| 105    | RAHUL    | MALE   | 5       | SURAT     | DATA ANALYZER       | 79000  | 2          | RAHUL@GMAIL.COM  |
+| 106    | AJAY     | MALE   | 6       | MP        | ASSISTANT PROFESSOR | 50000  | 10         | AJAY@GMAIL.COM   |
+| 107    | VIJAY    | MALE   | 7       | BARDOLI   | PROFESSOR           | 20000  | 5          | VIJAY@GMAIL.COM  |
++--------+----------+--------+---------+-----------+---------------------+--------+------------+------------------+
+
+17. List names of employees who are fresher’s (less than 1 year of experience).
+ANSWER:
+	SELECT EMP_NAME FROM EMPLOYEE
+   WHERE EXPERIENCE <1;
+
+18. List department wise names of employees who has more than 5 years of
+experience.
+ANSWER:
+	SELECT DEPT_NO , EMP_NAME FROM EMPLOYEE
+   WHERE EXPERIENCE>5;
++---------+----------+
+| DEPT_NO | EMP_NAME |
++---------+----------+
+| 2       | ARATI    |
+| 6       | AJAY     |
++---------+----------+
+
+19. List department having no employees.
+ANSWER:
+	SELECT * FROM EMPLOYEE
+   WHERE DEPT_NO NOT IN(SELECT DEPT_NO FROM EMPLOYEE);
+
+20. Delete the employee whose salary is less than 10000.
+ANSWER:
+	DELETE  FROM EMPLOYEE
+   WHERE SALARY<10000;
